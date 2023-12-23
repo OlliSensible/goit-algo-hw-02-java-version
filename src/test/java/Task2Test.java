@@ -1,18 +1,18 @@
-import org.example.PalindromeChecker;
+import org.example.Task2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class PalindromeCheckerTest {
+public class Task2Test {
 
     @Test
     public void testIsPalindrome() {
-        Assertions.assertTrue(PalindromeChecker.isPalindrome("Тут"));
-        Assertions.assertTrue(PalindromeChecker.isPalindrome("madam"));
-        Assertions.assertTrue(PalindromeChecker.isPalindrome("Дід і дід"));
-        Assertions.assertTrue(PalindromeChecker.isPalindrome("123a321"));
+        Assertions.assertTrue(Task2.isPalindrome("Тут"));
+        Assertions.assertTrue(Task2.isPalindrome("madam"));
+        Assertions.assertTrue(Task2.isPalindrome("Дід і дід"));
+        Assertions.assertTrue(Task2.isPalindrome("123a321"));
 
-        Assertions.assertFalse(PalindromeChecker.isPalindrome("hello"));
-        Assertions.assertFalse(PalindromeChecker.isPalindrome("Mikri"));
-        Assertions.assertFalse(PalindromeChecker.isPalindrome("123ab321"));
+        Assertions.assertFalse(Task2.isPalindrome("hello"));
+        Assertions.assertFalse(Task2.isPalindrome("Mikri"));
+        Assertions.assertFalse(Task2.isPalindrome("123ab321"));
     }
 }
