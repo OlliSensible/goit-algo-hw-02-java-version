@@ -3,43 +3,41 @@ package org.example;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Task1 {
-    public static void main(String[] args) {
-        Queue<String> queue = new LinkedList<>();
-        Random random = new Random();
-        Scanner scanner = new Scanner(System.in);
 
-        while (true) {
-            String request = generateRequest(random);
-            queue.add(request);
-            processRequest(request);
+    private Queue<Integer> queue = new LinkedList<>();
+    private int requestNumber = 0;
 
-            System.out.print("\u001B[38;2;242;194;207mContinue? (Yes/No or +/-) ==> \u001B[0m");
-            String answer = scanner.nextLine().replaceAll(" ", "").toLowerCase();
+    public int getQueueSize() {
+        return queue.size();
+    }
 
-            while (!isValidCommand(answer)) {
-                System.out.print("\u001B[38;2;242;148;173mInvalid command. Enter one of the following commands: Yes, No, +, - ==> \u001B[0m");
-                answer = scanner.nextLine().replaceAll(" ", "").toLowerCase();
-            }
+    public void generateRequest() {
+        int requestId = ++requestNumber;
+        queue.add(requestId);
+        System.out.println("Generated request with ID: " + requestId);
+    }
 
-            if (answer.equals("no") || answer.equals("-")) {
-                break;
-            }
+    public void processRequest() {
+        if (!queue.isEmpty()) {
+            int requestId = queue.remove();
+            System.out.println("Processed request with ID: " + requestId);
+        } else {
+            System.out.println("The queue is empty. No requests to process.");
         }
     }
 
-    public static String generateRequest(Random random) {
-        int number = random.nextInt(1000) + 1;
-        return "Application №" + number;
-    }
+    public static void main(String[] args) throws InterruptedException {
+        Task1 handler = new Task1();
+        Random random = new Random();
 
-    public static void processRequest(String request) {
-        System.out.println("\u001B[38;2;210;88;113mProcessed application № " + request + "\u001B[0m");
-    }
+        while (true) {
+            Thread.sleep(random.nextInt(2000));
+            handler.generateRequest();
 
-    public static boolean isValidCommand(String answer) {
-        return answer.equals("yes") || answer.equals("no") || answer.equals("+") || answer.equals("-");
+            Thread.sleep(random.nextInt(1000));
+            handler.processRequest();
+        }
     }
 }
